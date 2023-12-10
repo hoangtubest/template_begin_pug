@@ -141,7 +141,7 @@ const serve = (done) => {
       baseDir: [DIST_PATH],
       routes: routesOptions,
     },
-    port: 4444,
+    port: 5555,
     open: "external",
     startPath: "/",
   });
@@ -166,10 +166,6 @@ const sync = (done) => {
 };
 
 const watchFiles = (done) => {
-  // gulp.watch(
-  //   `${SRC_PATH}/html/**/*.html`,
-  //   gulp.series(html, validateHTML, browserReload)
-  // );
   gulp.watch(
     `${SRC_PATH}/pug/**/*.{pug, html}`,
     gulp.series(htmlPug, validateHTML, browserReload)
@@ -186,7 +182,6 @@ const watchFiles = (done) => {
 
 const buildFiles = gulp.series(
   clean,
-  // gulp.parallel(html, cssScss, script),
   gulp.parallel(htmlPug, cssScss, script),
   validateHTML
 );
@@ -198,7 +193,6 @@ const prod = gulp.series(buildFiles, staticFiles, minImageFiles, sync);
 
 export {
   minImageFiles,
-  html,
   htmlPug,
   validateHTML,
   cssScss,
